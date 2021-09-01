@@ -373,29 +373,53 @@ namespace BinaryMultiplicationForm
             showCalculation.Update();//For smooth scrool
             //int LengthOfMultiplier = 10/*bBinary.Text.Length*/;
 
-            //for (int i = 0; i < LengthOfMultiplier; i++)
-            //{
-            //    Label tx = new Label();
-            //    tx.Location = new Point(X - i * 5, Y + i * 20);
-            //    tx.Name = string.Format("txt {0}", i);
-            //    tx.Tag = string.Format("[{0}]", i);
-            //    tx.Text = string.Format("{0}", a[i]);
-            //    tx.Size = new Size(50, 20);
-            //    showCalculation.Controls.Add(tx);
-
-            //}
-            ////Show drawing
-            //Controls.Add(showCalculation);
-            ////End
-            //showCalculation.SuspendLayout();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btn_clearVisualization_Click(object sender, EventArgs e)
+        {
+            showCalculation.Controls.Clear();
+            this.Refresh();
+        }
+
+        private void btn_runVisualization_Click(object sender, EventArgs e)
         {
             int X = 260, Y = 50;
             int[] a = { 10001, 11101, 11010, 11001, 11001, 10001, 11101, 11010, 11001, 11001 };
             showCalculation.Update();//For smooth scrool
             int LengthOfMultiplier = 10/*bBinary.Text.Length*/;
+            //=============================
+            //Multiplicand
+            Label txa = new Label();
+            txa.Location = new Point(153,5);
+            txa.Text = string.Format("{0}", aBinary.Text);
+            txa.AutoSize = false;          
+            txa.Size = new Size(143, 15);
+            txa.TextAlign = ContentAlignment.MiddleRight;
+            txa.Margin = new Padding(3, 0, 3, 0);
+            showCalculation.Controls.Add(txa);
+            //=============================
+            //Multiplier
+            Label txb = new Label();
+            txb.Location = new Point(152, 25);
+            txb.Text = string.Format("{0}", bBinary.Text);
+            txb.AutoSize = false;
+            txb.Size = new Size(145, 15);
+            txb.Margin = new Padding(3, 0, 3, 0);
+            txb.TextAlign = ContentAlignment.MiddleRight;
+            showCalculation.Controls.Add(txb);
+            //=============================
+            //Multiplication sign
+            Label m = new Label();
+            m.Location = new Point(145, 15);
+            m.Text = string.Format("x");
+            m.AutoSize = false;
+            m.Size = new Size(100, 50);
+            m.Margin = new Padding(3, 3, 3, 3);
+            showCalculation.Controls.Add(m);
+
+            //=============================
+            //Print line
+
 
             for (int i = 0; i < LengthOfMultiplier; i++)
             {

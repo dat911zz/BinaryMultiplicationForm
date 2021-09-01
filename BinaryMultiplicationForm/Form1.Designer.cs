@@ -281,7 +281,7 @@ namespace BinaryMultiplicationForm
             this.btn_runVisualization.TabIndex = 14;
             this.btn_runVisualization.Text = "Chạy minh họa";
             this.btn_runVisualization.UseVisualStyleBackColor = true;
-            this.btn_runVisualization.Click += new System.EventHandler(this.button2_Click);
+            this.btn_runVisualization.Click += new System.EventHandler(this.btn_runVisualization_Click);
             // 
             // btn_clearVisualization
             // 
@@ -291,6 +291,7 @@ namespace BinaryMultiplicationForm
             this.btn_clearVisualization.TabIndex = 4;
             this.btn_clearVisualization.Text = "Xoá minh họa";
             this.btn_clearVisualization.UseVisualStyleBackColor = true;
+            this.btn_clearVisualization.Click += new System.EventHandler(this.btn_clearVisualization_Click);
             // 
             // Form1
             // 
