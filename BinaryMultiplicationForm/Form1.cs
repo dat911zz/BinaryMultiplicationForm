@@ -53,6 +53,26 @@ namespace BinaryMultiplicationForm
         private void button1_Click(object sender, EventArgs e)
         {
             int num1 = 0, num2 = 0;
+            this.Refresh();
+            this.Invalidate();
+            //Show error provider
+            if (Int32.TryParse(nhapa.Text, out num1))
+            {
+                errorProvider1.SetError(nhapa, "");
+            }
+            else
+            {
+                errorProvider1.SetError(nhapa, "Chỉ được nhập số");
+            }
+            if (Int32.TryParse(nhapb.Text, out num2))
+            {
+                errorProvider2.SetError(nhapb, "");
+            }
+            else
+            {
+                errorProvider2.SetError(nhapb, "Chỉ được nhập số");
+            }
+            //Checking error and running functions
             if (Int32.TryParse(nhapa.Text, out num1) && Int32.TryParse(nhapb.Text, out num2) && aBinary.Text != "Vượt quá giới hạn 16 bit!" && bBinary.Text != "Vượt quá giới hạn 16 bit!")
             {
                 label4.Text = (multiplyUsingLeftShift(num1, num2)).ToString();
@@ -69,11 +89,11 @@ namespace BinaryMultiplicationForm
             {
                 string message = "Vui lòng nhập lại!";
                 string title = "ERROR!";
+               
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 DialogResult result = MessageBox.Show(message, title, buttons, MessageBoxIcon.Error);
             }
         }
-
         public void Calculator(string Q, string M, ref string KQ)
         {
             char[] So_Nhan_Q, So_Bi_Nhan_M;
@@ -383,42 +403,31 @@ namespace BinaryMultiplicationForm
 
         private void btn_runVisualization_Click(object sender, EventArgs e)
         {
-            int X = 260, Y = 50;
-            int[] a = { 10001, 11101, 11010, 11001, 11001, 10001, 11101, 11010, 11001, 11001 };
-            showCalculation.Update();//For smooth scrool
+            int X = 263, Y = 50;
+            int[] a = { 10001, 11101, 11110, 11001, 11001, 10001, 11101, 11010, 11001, 11001 };
+            showCalculation.Update();//For smooth scrool                   
             int LengthOfMultiplier = 10/*bBinary.Text.Length*/;
             //=============================
+            //Show hidden label
+            showCalculation.Controls.Add(multiplication);
+            showCalculation.Controls.Add(soA);
+            showCalculation.Controls.Add(soB);
+            showCalculation.Controls.Add(line);
+            //=============================
             //Multiplicand
-            Label txa = new Label();
-            txa.Location = new Point(153,5);
-            txa.Text = string.Format("{0}", aBinary.Text);
-            txa.AutoSize = false;          
-            txa.Size = new Size(143, 15);
-            txa.TextAlign = ContentAlignment.MiddleRight;
-            txa.Margin = new Padding(3, 0, 3, 0);
-            showCalculation.Controls.Add(txa);
-            //=============================
-            //Multiplier
-            Label txb = new Label();
-            txb.Location = new Point(152, 25);
-            txb.Text = string.Format("{0}", bBinary.Text);
-            txb.AutoSize = false;
-            txb.Size = new Size(145, 15);
-            txb.Margin = new Padding(3, 0, 3, 0);
-            txb.TextAlign = ContentAlignment.MiddleRight;
-            showCalculation.Controls.Add(txb);
-            //=============================
-            //Multiplication sign
-            Label m = new Label();
-            m.Location = new Point(145, 15);
-            m.Text = string.Format("x");
-            m.AutoSize = false;
-            m.Size = new Size(100, 50);
-            m.Margin = new Padding(3, 3, 3, 3);
-            showCalculation.Controls.Add(m);
+            soA.Visible = true;
 
             //=============================
-            //Print line
+            //Multiplier
+            soB.Visible = true;
+
+            //=============================
+            //Multiplication sign
+            multiplication.Visible = true;
+
+            //=============================
+            //Print line           
+            line.Visible = true;
 
 
             for (int i = 0; i < LengthOfMultiplier; i++)
@@ -428,6 +437,9 @@ namespace BinaryMultiplicationForm
                 tx.Name = string.Format("txt {0}", i);
                 tx.Tag = string.Format("[{0}]", i);
                 tx.Text = string.Format("{0}", a[i]);
+                tx.AutoSize = false;
+                tx.Margin = new Padding(0, 0, 0, 0);
+                tx.TextAlign = ContentAlignment.MiddleRight;
                 tx.Size = new Size(50, 20);
                 showCalculation.Controls.Add(tx);
 
@@ -436,6 +448,14 @@ namespace BinaryMultiplicationForm
             Controls.Add(showCalculation);
             //End
             showCalculation.SuspendLayout();
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            soA.Visible = false;
+            soB.Visible = false;
+            multiplication.Visible = false;
+            line.Visible = false;
+            this.Refresh();
         }
     }
 }

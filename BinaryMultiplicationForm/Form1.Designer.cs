@@ -43,10 +43,10 @@ namespace BinaryMultiplicationForm
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.showCalculation = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
+            this.multiplication = new System.Windows.Forms.Label();
             this.soB = new System.Windows.Forms.Label();
             this.soA = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.line = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,8 +54,12 @@ namespace BinaryMultiplicationForm
             this.ketqua = new System.Windows.Forms.Label();
             this.btn_runVisualization = new System.Windows.Forms.Button();
             this.btn_clearVisualization = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.showCalculation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -65,7 +69,7 @@ namespace BinaryMultiplicationForm
             this.panel1.Controls.Add(this.aBinary);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.panel3);
-            this.panel1.Location = new System.Drawing.Point(337, 68);
+            this.panel1.Location = new System.Drawing.Point(352, 68);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(345, 76);
             this.panel1.TabIndex = 0;
@@ -166,7 +170,7 @@ namespace BinaryMultiplicationForm
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(348, 58);
+            this.label5.Location = new System.Drawing.Point(363, 58);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(202, 22);
             this.label5.TabIndex = 8;
@@ -176,10 +180,10 @@ namespace BinaryMultiplicationForm
             // 
             this.showCalculation.AutoScroll = true;
             this.showCalculation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.showCalculation.Controls.Add(this.label9);
+            this.showCalculation.Controls.Add(this.multiplication);
             this.showCalculation.Controls.Add(this.soB);
             this.showCalculation.Controls.Add(this.soA);
-            this.showCalculation.Controls.Add(this.label10);
+            this.showCalculation.Controls.Add(this.line);
             this.showCalculation.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.showCalculation.Location = new System.Drawing.Point(0, 240);
             this.showCalculation.Name = "showCalculation";
@@ -189,19 +193,19 @@ namespace BinaryMultiplicationForm
             this.showCalculation.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
             this.showCalculation.Paint += new System.Windows.Forms.PaintEventHandler(this.showCalculation_Paint);
             // 
-            // label9
+            // multiplication
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(241, 17);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(17, 20);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "x";
+            this.multiplication.AutoSize = true;
+            this.multiplication.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.multiplication.Location = new System.Drawing.Point(271, 17);
+            this.multiplication.Name = "multiplication";
+            this.multiplication.Size = new System.Drawing.Size(17, 20);
+            this.multiplication.TabIndex = 2;
+            this.multiplication.Text = "x";
             // 
             // soB
             // 
-            this.soB.Location = new System.Drawing.Point(252, 32);
+            this.soB.Location = new System.Drawing.Point(275, 32);
             this.soB.Name = "soB";
             this.soB.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.soB.Size = new System.Drawing.Size(143, 17);
@@ -211,7 +215,7 @@ namespace BinaryMultiplicationForm
             // 
             // soA
             // 
-            this.soA.Location = new System.Drawing.Point(252, 10);
+            this.soA.Location = new System.Drawing.Point(275, 10);
             this.soA.Name = "soA";
             this.soA.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.soA.Size = new System.Drawing.Size(143, 17);
@@ -219,14 +223,14 @@ namespace BinaryMultiplicationForm
             this.soA.Text = "0";
             this.soA.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label10
+            // line
             // 
-            this.label10.Location = new System.Drawing.Point(255, 37);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(139, 17);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "________________";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.line.Location = new System.Drawing.Point(285, 43);
+            this.line.Name = "line";
+            this.line.Size = new System.Drawing.Size(139, 20);
+            this.line.TabIndex = 3;
+            this.line.Text = "________________";
+            this.line.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // button1
             // 
@@ -267,7 +271,7 @@ namespace BinaryMultiplicationForm
             // ketqua
             // 
             this.ketqua.AutoSize = true;
-            this.ketqua.Location = new System.Drawing.Point(334, 207);
+            this.ketqua.Location = new System.Drawing.Point(353, 207);
             this.ketqua.Name = "ketqua";
             this.ketqua.Size = new System.Drawing.Size(16, 17);
             this.ketqua.TabIndex = 13;
@@ -275,7 +279,7 @@ namespace BinaryMultiplicationForm
             // 
             // btn_runVisualization
             // 
-            this.btn_runVisualization.Location = new System.Drawing.Point(337, 153);
+            this.btn_runVisualization.Location = new System.Drawing.Point(352, 153);
             this.btn_runVisualization.Name = "btn_runVisualization";
             this.btn_runVisualization.Size = new System.Drawing.Size(156, 42);
             this.btn_runVisualization.TabIndex = 14;
@@ -285,13 +289,21 @@ namespace BinaryMultiplicationForm
             // 
             // btn_clearVisualization
             // 
-            this.btn_clearVisualization.Location = new System.Drawing.Point(517, 153);
+            this.btn_clearVisualization.Location = new System.Drawing.Point(532, 153);
             this.btn_clearVisualization.Name = "btn_clearVisualization";
             this.btn_clearVisualization.Size = new System.Drawing.Size(165, 43);
             this.btn_clearVisualization.TabIndex = 4;
             this.btn_clearVisualization.Text = "Xoá minh họa";
             this.btn_clearVisualization.UseVisualStyleBackColor = true;
             this.btn_clearVisualization.Click += new System.EventHandler(this.btn_clearVisualization_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // errorProvider2
+            // 
+            this.errorProvider2.ContainerControl = this;
             // 
             // Form1
             // 
@@ -315,10 +327,13 @@ namespace BinaryMultiplicationForm
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "J2Team";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.showCalculation.ResumeLayout(false);
             this.showCalculation.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -344,11 +359,13 @@ namespace BinaryMultiplicationForm
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label soB;
         private System.Windows.Forms.Label soA;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label multiplication;
+        private System.Windows.Forms.Label line;
         private System.Windows.Forms.Label ketqua;
         private System.Windows.Forms.Button btn_runVisualization;
         private System.Windows.Forms.Button btn_clearVisualization;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ErrorProvider errorProvider2;
     }
 }
 
