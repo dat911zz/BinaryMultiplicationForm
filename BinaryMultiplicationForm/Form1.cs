@@ -16,8 +16,8 @@ namespace BinaryMultiplicationForm
         {
             char[] So_Nhan_Q, So_Bi_Nhan_M;
             int so_nhan, so_bi_nhan;
-            long Max_Bit_Out = 2147483648;//2^31 32 bit
 
+            long Max_Bit_Out = 2147483648;//2^31 32 bit
             int Max_Bit_In = 32768; // 16 bit
 
             Int32.TryParse(Q, out so_nhan);
@@ -270,24 +270,7 @@ namespace BinaryMultiplicationForm
             }
             return dodai;
         }
-        static int multiplyUsingLeftShift(int n, int m)
-        {
-            int ans = 0, count = 0;
-            while (m > 0)
-            {
-                // check for set bit and left
-                // shift n, count times
-                if (m % 2 == 1)
-                    ans += n << count;
-
-                // increment of place
-                // value (count)
-                count++;
-                m /= 2;
-            }
-
-            return ans;
-        }
+ 
 
 
         //=======================================================================================
@@ -353,9 +336,11 @@ namespace BinaryMultiplicationForm
                 string KQ = "";
                 aBinary.Text = ConvertDecimalToBinary(nhapa.Text);
                 bBinary.Text = ConvertDecimalToBinary(nhapb.Text);
+
                 //-------------Phần tính toán tại đây--------------//
                 /**/ Calculator(nhapa.Text, nhapb.Text, ref KQ); /**/
                 //-------------------------------------------------//
+
                 ketqua.Text = KQ;               
                 //Đưa 2 số vào phần minh họa
                 soA.Text = aBinary.Text;
@@ -452,12 +437,12 @@ namespace BinaryMultiplicationForm
             //=============================
             //Drawing dynamic line 
             Label linekq = new Label();
-            linekq.Location = new Point(X  , Y + (LengthOfMultiplier * 20) - 10);
-            linekq.Text = "_______________________";
+            linekq.Location = new Point(X - 50  , Y + (LengthOfMultiplier * 20) - 10);
+            linekq.Text = "__________________________";
             linekq.AutoSize = false;
             linekq.Margin = new Padding(0, 0, 0, 0);
             linekq.TextAlign = ContentAlignment.MiddleRight;
-            linekq.Size = new Size(150, 20);
+            linekq.Size = new Size(200, 20);
             showCalculation.Controls.Add(linekq);
             //=============================
             //Drawing Result

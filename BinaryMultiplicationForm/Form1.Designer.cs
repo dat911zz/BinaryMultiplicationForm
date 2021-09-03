@@ -142,7 +142,7 @@ namespace BinaryMultiplicationForm
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(86, 16);
+            this.label1.Location = new System.Drawing.Point(79, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(643, 32);
             this.label1.TabIndex = 3;
@@ -199,7 +199,7 @@ namespace BinaryMultiplicationForm
             // 
             this.multiplication.AutoSize = true;
             this.multiplication.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.multiplication.Location = new System.Drawing.Point(271, 17);
+            this.multiplication.Location = new System.Drawing.Point(257, 17);
             this.multiplication.Name = "multiplication";
             this.multiplication.Size = new System.Drawing.Size(17, 20);
             this.multiplication.TabIndex = 2;
