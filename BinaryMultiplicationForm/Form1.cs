@@ -10,90 +10,8 @@ namespace BinaryMultiplicationForm
         {
             InitializeComponent();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private String ConvertDecimalToBinary(string input)
-        {
-            int x;
-            if (int.TryParse(input, out x))
-            {
-                if (x > 32768)
-                {
-                    return "Vượt quá giới hạn 16 bit!";
-                }
-                return Convert.ToString(x, 2);
-            }
-            else
-            {
-                return "-";
-            }
-        }
-        private void textChange_aBinary(object sender, EventArgs e)
-        {
-            aBinary.Text = ConvertDecimalToBinary(nhapa.Text);
-        }
-        private void textChange_bBinary(object sender, EventArgs e)
-        {
-            bBinary.Text = ConvertDecimalToBinary(nhapb.Text);
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int num1 = 0, num2 = 0;
-            this.Refresh();
-            this.Invalidate();
-            //Show error provider
-            if (Int32.TryParse(nhapa.Text, out num1))
-            {
-                errorProvider1.SetError(nhapa, "");
-            }
-            else
-            {
-                errorProvider1.SetError(nhapa, "Chỉ được nhập số");
-            }
-            if (Int32.TryParse(nhapb.Text, out num2))
-            {
-                errorProvider2.SetError(nhapb, "");
-            }
-            else
-            {
-                errorProvider2.SetError(nhapb, "Chỉ được nhập số");
-            }
-            //Checking error and running functions
-            if (Int32.TryParse(nhapa.Text, out num1) && Int32.TryParse(nhapb.Text, out num2) && aBinary.Text != "Vượt quá giới hạn 16 bit!" && bBinary.Text != "Vượt quá giới hạn 16 bit!")
-            {
-                label4.Text = (multiplyUsingLeftShift(num1, num2)).ToString();
-                string KQ = "";
-                aBinary.Text = ConvertDecimalToBinary(nhapa.Text);
-                bBinary.Text = ConvertDecimalToBinary(nhapb.Text);
-                Calculator(nhapa.Text, nhapb.Text, ref KQ);
-                ketqua.Text = KQ;
-                //Đưa 2 số vào phần minh họa
-                soA.Text = aBinary.Text;
-                soB.Text = bBinary.Text;
-            }
-            else
-            {
-                string message = "Vui lòng nhập lại!";
-                string title = "ERROR!";
-               
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                DialogResult result = MessageBox.Show(message, title, buttons, MessageBoxIcon.Error);
-            }
-        }
+        //=======================================================================================
+        //Phần tính toán
         public void Calculator(string Q, string M, ref string KQ)
         {
             char[] So_Nhan_Q, So_Bi_Nhan_M;
@@ -207,13 +125,24 @@ namespace BinaryMultiplicationForm
             ChuyenMangCharThanhString(KetQua,ref KQ, DoDai_KQ);
             //KQ = KetQua.ToString(); <-- Lỗi không thể chuyển từ Char[] -> String
             long kq = Tinh_Ket_Qua_Tu_Nhi_Phan(KetQua, DoDai_KQ);
+            label4.Text = kq.ToString();
         }
         static void ChuyenMangCharThanhString(char[] x, ref string y, int DoDai)
         {
+            y = "";
             for (int i = 0; i < DoDai; i++)
             {
-                y = y.Insert(y.Length, x[i].ToString());
+                y = y.Insert(0, x[i].ToString());
             }
+            y = ReverseString(y);
+        }
+        static string ReverseString(string s)
+        {
+            // Convert to char array, then call Array.Reverse.
+            // ... Finally use string constructor on array.
+            char[] array = s.ToCharArray();
+            Array.Reverse(array);
+            return new string(array);
         }
         static void CatSoThuaTrongChuoiKQ(char[] x, ref int DoDai)
         {
@@ -361,6 +290,8 @@ namespace BinaryMultiplicationForm
         }
 
 
+        //=======================================================================================
+        //Phần giao diện 
         public void duongthang(int trai, int doc, int dai, int rong)
         {
             Graphics g = showCalculation.CreateGraphics();
@@ -370,31 +301,99 @@ namespace BinaryMultiplicationForm
         {
             showCalculation.Update();
         }
-        private void showCalculation_Paint(object sender, PaintEventArgs e)// XY(0,208)
+        private String ConvertDecimalToBinary(string input)
         {
-            //duongthang(1, 1, 930, 255);
-            int X = 260, Y = 50;
-            int[] a = { 10001, 11101, 11010, 11001, 11001, 10001, 11101, 11010, 11001, 11001 };
-            
-            string[] str;
-            char[] multiplier;
-            //multiplier = bBinary.Text.ToCharArray();
-            //if ( multiplier[0] != '0')
-            //{
-          
-            //    int lengthOfMultiplier = Real_Lenght(multiplier);
-            //    for (int i = lengthOfMultiplier - 1; i >= 0; i--)
-            //    {
-            //        //đang sửa
-            //    }
-            //}
-            
-            
-            showCalculation.Update();//For smooth scrool
-            //int LengthOfMultiplier = 10/*bBinary.Text.Length*/;
-
+            int x;
+            if (int.TryParse(input, out x))
+            {
+                if (x > 32768)
+                {
+                    return "Vượt quá giới hạn 16 bit!";
+                }
+                return Convert.ToString(x, 2);
+            }
+            else
+            {
+                return "-";
+            }
         }
+        private void textChange_aBinary(object sender, EventArgs e)
+        {
+            aBinary.Text = ConvertDecimalToBinary(nhapa.Text);
+        }
+        private void textChange_bBinary(object sender, EventArgs e)
+        {
+            bBinary.Text = ConvertDecimalToBinary(nhapb.Text);
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int num1 = 0, num2 = 0;
+            showCalculation.Controls.Clear();
+            showCalculation.Refresh();
+            //Show error provider
+            if (Int32.TryParse(nhapa.Text, out num1))
+            {
+                errorProvider1.SetError(nhapa, "");
+            }
+            else
+            {
+                errorProvider1.SetError(nhapa, "Chỉ được nhập số");
+            }
+            if (Int32.TryParse(nhapb.Text, out num2))
+            {
+                errorProvider2.SetError(nhapb, "");
+            }
+            else
+            {
+                errorProvider2.SetError(nhapb, "Chỉ được nhập số");
+            }
+            //Checking error and running functions
+            if (Int32.TryParse(nhapa.Text, out num1) && Int32.TryParse(nhapb.Text, out num2) && aBinary.Text != "Vượt quá giới hạn 16 bit!" && bBinary.Text != "Vượt quá giới hạn 16 bit!")
+            {
+                string KQ = "";
+                aBinary.Text = ConvertDecimalToBinary(nhapa.Text);
+                bBinary.Text = ConvertDecimalToBinary(nhapb.Text);
+                //-------------Phần tính toán tại đây--------------//
+                /**/ Calculator(nhapa.Text, nhapb.Text, ref KQ); /**/
+                //-------------------------------------------------//
+                ketqua.Text = KQ;               
+                //Đưa 2 số vào phần minh họa
+                soA.Text = aBinary.Text;
+                soB.Text = bBinary.Text;
+            }
+            else
+            {
+                string message = "Vui lòng nhập lại!";
+                string title = "ERROR!";
 
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                DialogResult result = MessageBox.Show(message, title, buttons, MessageBoxIcon.Error);
+            }
+        }
+        private void calculatingVisualization(string[] a)
+        {
+            char[] str = bBinary.Text.ToCharArray();
+            char[] tmp = new char[100];
+            int idx = 0;
+            int n = bBinary.Text.Length;
+
+            for (int i = n - 1; i >= 0; i--) 
+            {
+                if (str[i] == '0')
+                {
+                    for (int j = 0; j < aBinary.Text.Length; j++)
+                    {
+                        tmp[j] = '0';
+                    }
+                    tmp[aBinary.Text.Length] = '\0';
+                    ChuyenMangCharThanhString(tmp, ref a[idx++], Real_Lenght(tmp));
+                }
+                else
+                {
+                    a[idx++] = aBinary.Text;
+                }
+            }
+        }
         private void btn_clearVisualization_Click(object sender, EventArgs e)
         {
             showCalculation.Controls.Clear();
@@ -403,10 +402,14 @@ namespace BinaryMultiplicationForm
 
         private void btn_runVisualization_Click(object sender, EventArgs e)
         {
-            int X = 263, Y = 50;
-            int[] a = { 10001, 11101, 11110, 11001, 11001, 10001, 11101, 11010, 11001, 11001 };
+            int X = 163, Y = 50;
+            string[] a = new string[50];
+            
             showCalculation.Update();//For smooth scrool                   
-            int LengthOfMultiplier = 10/*bBinary.Text.Length*/;
+            int LengthOfMultiplier = bBinary.Text.Length;
+            //=============================
+            //Generating string
+            calculatingVisualization(a);
             //=============================
             //Show hidden label
             showCalculation.Controls.Add(multiplication);
@@ -426,9 +429,11 @@ namespace BinaryMultiplicationForm
             multiplication.Visible = true;
 
             //=============================
-            //Print line           
+            //Show line           
             line.Visible = true;
 
+            //=============================
+            //Drawing elements
 
             for (int i = 0; i < LengthOfMultiplier; i++)
             {
@@ -440,10 +445,30 @@ namespace BinaryMultiplicationForm
                 tx.AutoSize = false;
                 tx.Margin = new Padding(0, 0, 0, 0);
                 tx.TextAlign = ContentAlignment.MiddleRight;
-                tx.Size = new Size(50, 20);
+                tx.Size = new Size(150, 20);
                 showCalculation.Controls.Add(tx);
 
             }
+            //=============================
+            //Drawing dynamic line 
+            Label linekq = new Label();
+            linekq.Location = new Point(X  , Y + (LengthOfMultiplier * 20) - 10);
+            linekq.Text = "_______________________";
+            linekq.AutoSize = false;
+            linekq.Margin = new Padding(0, 0, 0, 0);
+            linekq.TextAlign = ContentAlignment.MiddleRight;
+            linekq.Size = new Size(150, 20);
+            showCalculation.Controls.Add(linekq);
+            //=============================
+            //Drawing Result
+            Label kq = new Label();
+            kq.Location = new Point(X , Y + (LengthOfMultiplier * 20) + 8);
+            kq.Text = string.Format("{0}", ketqua.Text);
+            kq.AutoSize = false;
+            kq.Margin = new Padding(0, 0, 0, 0);
+            kq.TextAlign = ContentAlignment.MiddleRight;
+            kq.Size = new Size(150, 20);
+            showCalculation.Controls.Add(kq);
             //Show drawing
             Controls.Add(showCalculation);
             //End
