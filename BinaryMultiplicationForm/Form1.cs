@@ -293,7 +293,7 @@ namespace BinaryMultiplicationForm
                 {
                     return "Vượt quá giới hạn 16 bit!";
                 }
-                return Convert.ToString(x, 2);
+                return Convert.ToString(Math.Abs(x), 2);
             }
             else
             {
